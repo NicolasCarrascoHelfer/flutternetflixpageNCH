@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
       "Series",
       "Documentaries"
     ];
+    final List<String> personal = [
+      "You are watching",
+      "Favorites",
+      "Newer Seasons",
+    ];
 
     return MaterialApp(
         title: 'Netflixapp',
@@ -29,7 +34,8 @@ class MyApp extends StatelessWidget {
                 bodyMedium: TextStyle(color: Colors.white)),
             iconTheme: const IconThemeData(
               color: detailColor,
-            )),
+            ),
+            dividerTheme: const DividerThemeData(color: detailColor)),
         home: Scaffold(
           backgroundColor: backgroundColor,
           drawer: Drawer(
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
                             children: [
                               Image.asset(
                                 'assets/net_logo.png',
-                                width: size.width * 0.11,
+                                width: size.width * 0.13,
                               ),
                               const Icon(Icons.star),
                               const Icon(Icons.account_circle),
@@ -62,14 +68,14 @@ class MyApp extends StatelessWidget {
                       child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: ListView.builder(
-                        itemCount: 4,
+                        itemCount: personal.length,
                         itemBuilder: (context, index) {
                           return Container(
                             margin: const EdgeInsets.only(top: 15),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(categories[index]),
+                                Text(personal[index]),
                                 SizedBox(
                                   height: size.width * 0.04,
                                 ),
@@ -145,4 +151,3 @@ class MyApp extends StatelessWidget {
         ));
   }
 }
-
