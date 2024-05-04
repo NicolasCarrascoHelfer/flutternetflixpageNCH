@@ -9,12 +9,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    const backgroundColor = Color.fromARGB(255, 28, 28, 28);
+    const secondBackgroundColor = Colors.black;
+    const thirdBackgroundColor = Color.fromARGB(255, 33, 33, 33);
+    const detailColor = Colors.red;
     final List<String> categories = [
       "Top ratings",
       "Movies",
       "Series",
       "Documentary"
     ];
+
     return MaterialApp(
         title: 'Netflixapp',
         theme: ThemeData(
@@ -22,36 +27,36 @@ class MyApp extends StatelessWidget {
                 bodyLarge: TextStyle(color: Colors.white),
                 bodyMedium: TextStyle(color: Colors.white)),
             iconTheme: const IconThemeData(
-              color: Colors.red,
+              color: detailColor,
             )),
         home: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 28, 28, 28),
+          backgroundColor: backgroundColor,
           drawer: Drawer(
-              backgroundColor: Colors.black,
+              backgroundColor: secondBackgroundColor,
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height*0.147,
+                    height: size.height * 0.147,
                     child: DrawerHeader(
-                      child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset(
-                              'assets/net_logo.png',
-                              width: size.width * 0.11,
-                            ),
-                            const Icon(Icons.star),
-                            const Icon(Icons.account_circle),
-                          ],
+                        child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                'assets/net_logo.png',
+                                width: size.width * 0.11,
+                              ),
+                              const Icon(Icons.star),
+                              const Icon(Icons.account_circle),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  )),),
-                  
+                      ],
+                    )),
+                  ),
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -76,9 +81,9 @@ class MyApp extends StatelessWidget {
                 ],
               )),
           appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.red),
+            iconTheme: const IconThemeData(color: detailColor),
             centerTitle: true,
-            backgroundColor: Colors.black,
+            backgroundColor: secondBackgroundColor,
             title: Image.asset(
               'assets/net_logo.png',
               width: size.width * 0.3,
@@ -88,13 +93,13 @@ class MyApp extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(15),
-                color: const Color.fromARGB(255, 33, 33, 33),
+                color: thirdBackgroundColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ...categories.map((e) => Text(
                           e,
-                          style: const TextStyle(color: Colors.red),
+                          style: const TextStyle(color: detailColor),
                         )),
                   ],
                 ),
@@ -103,7 +108,7 @@ class MyApp extends StatelessWidget {
                   child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: categories.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: const EdgeInsets.only(top: 15),
@@ -123,7 +128,7 @@ class MyApp extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: Container(
-              color: Colors.black,
+              color: secondBackgroundColor,
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: const SafeArea(
                 child: Row(
@@ -145,26 +150,56 @@ class MovieList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final List<Column> movies = [
+      Column(
+        children: [
+          Image.asset(
+            "assets/starwars.jpg",
+            width: size.width * 0.25,
+          ),
+          const Text("Star Wars")
+        ],
+      ),
+      Column(
+        children: [
+          Image.asset(
+            "assets/walle.jpeg",
+            width: size.width * 0.285,
+          ),
+          const Text("WALL-E")
+        ],
+      ),
+      Column(
+        children: [
+          Image.asset(
+            "assets/jaws.jpg",
+            width: size.width * 0.285,
+          ),
+          const Text("JAWS")
+        ],
+      ),
+      Column(
+        children: [
+          Image.asset(
+            "assets/spiderman.webp",
+            width: size.width * 0.285,
+          ),
+          const Text("Spiderman")
+        ],
+      ),
+    ];
 
     return SizedBox(
       height: size.height * 0.25,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: 5,
+          itemCount: movies.length,
           itemBuilder: (context, index) {
             return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/starwars.jpg",
-                      width: size.width * 0.25,
-                    ),
-                    const Text("Star Wars")
-                  ],
-                ));
+                child: movies[index]);
           }),
     );
   }
